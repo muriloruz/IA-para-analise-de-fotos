@@ -23,7 +23,7 @@ def classify_image(model, image):
     try:
         preprocessed_image = preprocess_image(image)
         predictions = model.predict(preprocessed_image)  # Faz a predição
-        decode_predictions = d(predictions, top=3)[0]  # Decodifica as predições com base na única imagem enviada
+        decode_predictions = d(predictions, top=1)[0]  # Decodifica as predições com base na única imagem enviada
         return decode_predictions
     except Exception as e:
         st.error(f"Erro ao classificar a imagem: {str(e)}")
@@ -51,7 +51,7 @@ def main():
                 if predictions:
                     st.subheader("Classificação Completa!")
                     for _, label, score in predictions:
-                        st.write(f"**{label}**: {score*100:.2f}%")
+                        st.write(f"Com base na análise, fica claro que isso é um(a) \"{label}\".\nA porcentagem de certeza é de: {score*100:.2f}%")
 
 
 if __name__ == "__main__":
